@@ -15,6 +15,10 @@ package-lock.json
 # Credentials and sensitive files
 credentials.txt
 
+# APK files
+*.apk
+LaundryApp.apk
+
 # Build outputs
 dist/
 build/
