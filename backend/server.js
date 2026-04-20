@@ -30,30 +30,14 @@ connectDB();
 // Enable CORS (Cross-Origin Resource Sharing) for frontend communication
 console.log('🔧 Configuring middleware...');
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    const allowedOrigins = [
-      'https://lms-1-4awd.onrender.com',  // Production frontend
-      'http://localhost:5173',             // Local development
-      'http://localhost:5174',             // Local development alt
-      'capacitor://localhost',             // Mobile app
-      'http://localhost'                   // Mobile app alternative
-    ];
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      console.log('⚠️  CORS blocked origin:', origin);
-      callback(null, true); // Allow anyway for now
-    }
-  },
+  origin: true, // Allow all origins with credentials
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 200,
-  preflightContinue: false
+  preflightContinue: false,
+  maxAge: 86400 // 24 hours
 }));
 
 // Handle preflight requests explicitly
