@@ -133,6 +133,23 @@ app.use('/api/admin', adminRoutes);
 // UTILITY ENDPOINTS
 // ============================================
 
+// Root endpoint - verify server is accessible
+app.get('/', (req, res) => {
+  console.log('✅ Root endpoint accessed');
+  res.json({ 
+    status: 'OK', 
+    message: 'Laundry Service Backend API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      auth: '/api/auth',
+      users: '/api/users',
+      providers: '/api/providers',
+      orders: '/api/orders'
+    }
+  });
+});
+
 // Health check endpoint - verify server is running
 app.get('/api/health', (req, res) => {
   console.log('✅ Health check requested');
