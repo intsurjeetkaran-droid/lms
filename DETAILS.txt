@@ -1,0 +1,604 @@
+==================================================
+LAUNDRY SERVICE SYSTEM - USER GUIDE
+==================================================
+
+This document explains the Laundry Service System in simple, non-technical terms for business users, managers, and stakeholders.
+
+==================================================
+WHAT IS THIS SYSTEM?
+==================================================
+
+This is a complete online laundry management platform that connects:
+- CUSTOMERS who need laundry services
+- SERVICE PROVIDERS who offer laundry services
+- ADMINISTRATORS who manage the platform
+
+Think of it like Uber, but for laundry services!
+
+The system includes a beautiful, modern landing page that explains 
+everything about the platform before users sign up.
+
+==================================================
+LANDING PAGE
+==================================================
+
+When you first visit the website, you'll see a professional landing page with:
+
+VISUAL DESIGN:
+- Clean, modern interface with smooth animations
+- Animated background with moving particles
+- Light and dark theme options (click sun/moon icon)
+- Professional icons throughout
+- Sidebar navigation for internal pages
+- Responsive design for all screen sizes (mobile, tablet, desktop)
+- Sky blue light theme with excellent contrast
+- Deep slate dark theme for comfortable viewing
+- Smooth theme transitions
+- Complete dark mode support on all 17 pages
+- Mobile-first responsive design (320px and up)
+- Touch-optimized buttons and controls
+- Adaptive layouts for different screen sizes
+
+COLOR PALETTE:
+Light Theme:
+- Background: Sky Blue (#f0f9ff) - Fresh and airy
+- Primary: Sky 500 (#0ea5e9) - Vibrant blue
+- Cards: White with soft shadows
+
+Dark Theme:
+- Background: Slate 900 (#0f172a) - Professional dark
+- Primary: Sky 400 (#38bdf8) - Bright blue
+- Cards: Slate 800 with proper contrast
+
+NAVIGATION SYSTEM:
+- Landing Page: Separate navbar with smooth scroll
+- Auth Pages: Standalone (no navbar or sidebar)
+- Internal Platform: Sidebar navigation with:
+  * Role-based menu items
+  * Mobile hamburger menu
+  * Theme toggle
+  * User profile display
+  * Logout button
+
+SECTIONS YOU'LL FIND:
+1. Hero Section - Main introduction with statistics
+2. Features - 8 key features with icons and descriptions
+3. How It Works - 7-step process guide
+4. Pricing Logic - Comparison of traditional vs our system
+5. Provider Benefits - Why service providers should join
+6. Call-to-Action - Get started buttons
+7. Footer - Contact information and links
+
+INTERACTIVE FEATURES:
+- Smooth scrolling when clicking navigation links
+- Theme toggle for light/dark mode (saves your preference)
+- Hover effects on cards and buttons
+- Responsive design works on phones (320px+), tablets, and computers
+- Sidebar navigation for easy access to all features
+- Mobile-friendly hamburger menu
+- Loading indicators when fetching data
+- Friendly messages when no data is available
+- Error messages with retry options
+- Empty state displays with helpful guidance
+- Touch-optimized for mobile devices
+- Keyboard navigation support
+- Proper contrast ratios for accessibility
+
+==================================================
+HOW IT WORKS
+==================================================
+
+FOR CUSTOMERS:
+1. Sign up and create an account
+2. Find nearby laundry service providers on a map
+3. Select items you want to wash (shirts, pants, etc.)
+4. Choose your pickup location
+5. Submit your order
+6. Provider reviews and gives you final price
+7. Pay online (UPI) or cash on delivery
+8. Track your order status
+9. Receive clean clothes
+10. Rate and review the service
+
+FOR SERVICE PROVIDERS:
+1. Register your laundry business
+2. Set up your shop location and service area
+3. Add items you wash with prices (shirt ₹20, jeans ₹30, etc.)
+4. Set your payment details (UPI ID, QR code)
+5. Receive orders from nearby customers
+6. Review orders and set prices for special items
+7. Pick up clothes from customer
+8. Wash, dry, and iron
+9. Deliver back to customer
+10. Receive payment
+
+FOR ADMINISTRATORS:
+1. Monitor all activities on the platform
+2. Approve new service providers
+3. Handle customer complaints
+4. Block bad users if needed
+5. View business statistics and revenue
+
+==================================================
+SYSTEM FEATURES
+==================================================
+
+REGISTRATION SYSTEM:
+- Modern multi-step slider interface
+- Role selection: Customer or Provider
+- Dynamic form fields based on role
+- Customer: 5 steps (role, name, email, phone, password)
+- Provider: 9 steps (adds shop name, address, location, service radius)
+- **Automatic location detection** using browser GPS
+- Click "Get Current Location" to capture coordinates
+- Browser asks for permission before accessing location
+- Progress bar shows completion percentage
+- Smooth animations between steps
+- Back button to correct mistakes
+- Real-time validation
+- Security: Admin role cannot be created from frontend
+
+PROVIDER APPROVAL:
+- New providers require admin approval
+- Cannot accept orders until approved
+- Approval message shown after registration
+- Admin reviews and approves from dashboard
+
+LOCATION-BASED MATCHING:
+- System automatically shows customers only nearby providers
+- Uses GPS to calculate distance
+- Providers can set how far they want to serve (5km, 10km, etc.)
+
+FLEXIBLE PRICING:
+- Providers set their own prices
+- Customers can add special items not in the list
+- Provider reviews and sets price for special items
+- Final price shown before payment
+
+REAL-TIME TRACKING:
+- Customers can see order status at any time
+- Status updates: Awaiting Review → Confirmed → Picked Up → Processing → Delivered → Completed
+
+MULTIPLE PAYMENT OPTIONS:
+- UPI payment (Google Pay, PhonePe, etc.)
+- Cash on Delivery
+- Secure transaction tracking
+
+QUALITY ASSURANCE:
+- Customers can rate and review services
+- Complaint system for issues
+- Admin team resolves disputes
+
+==================================================
+BUSINESS BENEFITS
+==================================================
+
+FOR CUSTOMERS:
+✓ Convenient - Order from home
+✓ Transparent pricing - Know cost before confirming
+✓ Track your order - No surprises
+✓ Multiple providers - Choose the best one
+✓ Safe payments - UPI or cash
+
+FOR SERVICE PROVIDERS:
+✓ More customers - Online visibility
+✓ Control pricing - Set your own rates
+✓ Manage orders - Easy tracking system
+✓ GPS navigation - Find customers easily
+✓ Payment flexibility - Accept UPI or cash
+
+FOR BUSINESS OWNERS:
+✓ Scalable platform - Add unlimited providers
+✓ Revenue tracking - See all transactions
+✓ Quality control - Handle complaints
+✓ User management - Block bad actors
+✓ Analytics - Understand business performance
+
+==================================================
+PRICING STRUCTURE
+==================================================
+
+The system calculates price as:
+
+ITEM COSTS:
+- Shirt: ₹20 (example)
+- Jeans: ₹30 (example)
+- Custom items: Provider sets price
+
+ADDITIONAL CHARGES:
+- Pickup charge: Set by provider
+- Delivery charge: Set by provider
+- Distance charge: ₹5 per km (example)
+- Extra charges: For special requests
+
+TOTAL = Items + Pickup + Delivery + Distance + Extra
+
+Example:
+- 2 Shirts (₹20 each) = ₹40
+- 1 Jeans = ₹30
+- Pickup = ₹20
+- Delivery = ₹20
+- Distance (3 km × ₹5) = ₹15
+- TOTAL = ₹125
+
+==================================================
+ORDER LIFECYCLE
+==================================================
+
+STEP 1: ORDER CREATION
+- Customer selects items and location
+- System calculates base price
+- Order sent to provider
+
+STEP 2: PROVIDER REVIEW
+- Provider sees order details
+- Sets prices for custom items
+- Adds any extra charges
+- Confirms final price
+
+STEP 3: CUSTOMER CONFIRMATION
+- Customer sees final price
+- Chooses payment method
+- Confirms order
+
+STEP 4: PICKUP
+- Provider navigates to customer location
+- Collects clothes
+- Updates status to "Picked Up"
+
+STEP 5: PROCESSING
+- Provider washes, dries, irons
+- Updates status to "Processing"
+
+STEP 6: DELIVERY
+- Provider delivers clean clothes
+- Updates status to "Delivered"
+- Collects payment if COD
+
+STEP 7: COMPLETION
+- Customer confirms receipt
+- Gives rating and review
+- Order marked "Completed"
+
+==================================================
+SAFETY & SECURITY
+==================================================
+
+USER SAFETY:
+- All passwords are encrypted
+- Secure login system
+- Phone number verification
+- User blocking for bad behavior
+- Admin role protected (cannot be created from frontend)
+- Role validation (only customer/provider allowed)
+- Provider approval system for quality control
+
+PAYMENT SECURITY:
+- UPI payments through official apps
+- Transaction ID tracking
+- No credit card storage
+- COD option available
+
+DATA PRIVACY:
+- Personal information protected
+- Location data used only for service
+- No data sharing with third parties
+
+==================================================
+COMPLAINT RESOLUTION
+==================================================
+
+If customer has an issue:
+1. Customer raises complaint through app
+2. Selects complaint type (quality, delivery, payment, etc.)
+3. Describes the problem
+4. Admin team reviews complaint
+5. Admin contacts both parties
+6. Issue resolved fairly
+7. Complaint marked as resolved
+
+Complaint Types:
+- Quality Issue: Clothes not cleaned properly
+- Delivery Issue: Late or wrong delivery
+- Payment Issue: Overcharging or payment problems
+- Behavior Issue: Rude or unprofessional conduct
+- Other: Any other problems
+
+==================================================
+GETTING STARTED
+==================================================
+
+FIRST TIME VISITORS:
+1. Visit the website (you'll see the landing page)
+2. Scroll through to learn about features
+3. Try the theme toggle (sun/moon icon) to switch between light/dark mode
+4. Read about how the system works
+5. Click "Get Started" or "Register" button
+6. Choose your role: Customer or Service Provider
+
+QUICK START WITH TEST DATA:
+If the system administrator has run the database seeder, you can use 
+pre-created test accounts to explore the system immediately:
+
+1. Check the credentials.txt file (provided by admin)
+2. Use any of these accounts to login:
+   - Admin: admin@test.com / 123456
+   - Provider: provider1@test.com / 123456 (or provider2-10)
+   - Customer: customer1@test.com / 123456 (or customer2-5)
+3. All test accounts use password: 123456
+4. Test accounts come with:
+   - Providers have complete profiles and garments
+   - Sample orders in various stages
+   - Feedback and complaints for testing
+   - Payment configurations already set up
+
+FOR CUSTOMERS:
+1. Open the website
+2. Click "Register"
+3. **Multi-Step Registration Process:**
+   - Step 1: Select "Customer" role
+   - Step 2: Enter your full name
+   - Step 3: Enter your email address
+   - Step 4: Enter your phone number
+   - Step 5: Create a password (minimum 6 characters)
+   - Click "Create Account"
+4. Login and start ordering!
+
+FOR SERVICE PROVIDERS:
+1. Open the website
+2. Click "Register"
+3. **Extended Multi-Step Registration:**
+   - Step 1: Select "Provider" role
+   - Step 2: Enter your full name
+   - Step 3: Enter your email address
+   - Step 4: Enter your phone number
+   - Step 5: Create a password
+   - Step 6: Enter your shop name
+   - Step 7: Enter your shop address
+   - Step 8: **Allow location access** - Click "Get Current Location" button
+     * Your browser will ask for permission
+     * Click "Allow" to share your location
+     * System automatically captures GPS coordinates
+   - Step 9: Set service radius (optional, defaults to 10km)
+   - Click "Create Account"
+4. **Wait for admin approval** (you'll see a message)
+5. Once approved, login and complete setup
+6. Add your garment prices
+7. Set up payment details
+8. Start receiving orders!
+
+==================================================
+USER EXPERIENCE FEATURES
+==================================================
+
+LOADING STATES:
+When the system is fetching data, you'll see:
+- Animated loading spinner
+- Helpful message like "Finding nearby providers..."
+- Clear indication that something is happening
+- No blank screens or confusion
+
+EMPTY STATES:
+When there's no data to display, you'll see:
+- Friendly icon and message
+- Explanation of why it's empty
+- Helpful guidance on what to do next
+- Action buttons to get started
+
+ERROR HANDLING:
+If something goes wrong, you'll see:
+- Clear error message explaining what happened
+- "Try Again" button to retry the action
+- No technical jargon or confusing codes
+- Helpful suggestions to fix the issue
+
+VISUAL FEEDBACK:
+- Buttons change color when you hover over them
+- Forms show when fields are required
+- Success messages after completing actions
+- Smooth animations and transitions
+- Clear active states for current page
+- Theme support on all pages (light/dark mode)
+- Responsive layouts adapt to screen size
+- Touch-friendly buttons on mobile
+- Proper spacing and typography
+- Accessible color contrast
+
+==================================================
+MOBILE APP (ANDROID)
+==================================================
+
+The Laundry Service System is now available as a native Android mobile app!
+
+MOBILE APP FEATURES:
+- Native GPS location detection using device GPS
+- Secure storage for login tokens
+- Professional splash screen on launch
+- Android back button support
+- Same beautiful UI as web version
+- Full dark mode support
+- Works offline with cached data
+- Fast and responsive performance
+
+APK LOCATION:
+The Android app is available at:
+- LaundryApp.apk (in project root folder)
+- Size: 4.3 MB
+- Android 5.1 (Lollipop) or higher required
+
+HOW TO INSTALL ON YOUR PHONE:
+1. Copy LaundryApp.apk to your Android phone
+2. Open the APK file on your phone
+3. Allow "Install from Unknown Sources" if prompted
+4. Tap "Install" and wait for completion
+5. Open the app and start using it!
+
+IMPORTANT FOR TESTING:
+- Backend server must be running on http://192.168.1.98:5000
+- Your phone and computer must be on the same WiFi network
+- Allow location permission when the app asks
+- Allow storage permission if needed
+
+MOBILE APP BENEFITS:
+✓ Faster than web browser
+✓ Native GPS for accurate location
+✓ Secure token storage
+✓ Works like a real app
+✓ No browser needed
+✓ Professional appearance
+✓ Easy to use on the go
+✓ Optimized UI for mobile screens
+✓ No overlapping text or buttons
+✓ Touch-friendly interface
+✓ Smooth scrolling and navigation
+
+==================================================
+SYSTEM REQUIREMENTS
+==================================================
+
+TO USE THE WEB VERSION:
+- Any modern web browser (Chrome, Firefox, Safari, Edge)
+- Internet connection
+- For location features: Allow location access
+- For payments: UPI app or cash
+- Works on mobile phones (320px and up)
+- Works on tablets (768px and up)
+- Works on desktop computers (1024px and up)
+
+TO USE THE MOBILE APP:
+- Android phone (version 5.1 or higher)
+- 4.3 MB free storage space
+- Internet connection (WiFi or mobile data)
+- Location permission for GPS features
+- Same WiFi network as backend server (for testing)
+
+VISUAL FEATURES:
+- Light and dark theme support on all pages
+- Smooth animations and transitions
+- Professional design with excellent contrast
+- Mobile-friendly interface with touch optimization
+- Responsive layouts that adapt to screen size
+- Accessible design with keyboard navigation
+- Properly spaced headers and titles on mobile
+- No overlapping UI elements
+- Touch-friendly buttons (minimum 44x44 pixels)
+- Adaptive text sizes for different screen sizes
+
+NO NEED TO:
+- Have technical knowledge
+- Use special devices
+- Pay for the app (it's free)
+
+==================================================
+SUPPORT & HELP
+==================================================
+
+If you need help:
+- Contact admin through the platform
+- Check order status in your dashboard
+- Review this guide for common questions
+- Admin team available to resolve issues
+
+TEST ACCOUNTS (If Seeder Was Run):
+If you're testing the system, use these credentials:
+- Admin: admin@test.com / 123456
+- Provider: provider1@test.com to provider10@test.com / 123456
+- Customer: customer1@test.com to customer5@test.com / 123456
+
+All test accounts have password: 123456
+Check credentials.txt file for complete list with names and phone numbers.
+
+==================================================
+FUTURE ENHANCEMENTS
+==================================================
+
+Planned features:
+- Mobile app for iOS and Android
+- SMS notifications for order updates
+- Loyalty points and discounts
+- Subscription plans for regular customers
+- Multiple pickup/delivery slots
+- Photo upload of clothes
+- Damage reporting with images
+
+==================================================
+BUSINESS METRICS
+==================================================
+
+Track these numbers:
+- Total orders per day/week/month
+- Average order value
+- Customer satisfaction ratings
+- Provider performance
+- Revenue generated
+- Complaint resolution time
+- Customer retention rate
+
+==================================================
+BEST PRACTICES
+==================================================
+
+FOR CUSTOMERS:
+✓ Provide accurate location
+✓ List all items clearly
+✓ Be available during pickup/delivery
+✓ Give honest feedback
+✓ Report issues promptly
+
+FOR PROVIDERS:
+✓ Keep prices competitive
+✓ Respond to orders quickly
+✓ Maintain quality standards
+✓ Be punctual for pickup/delivery
+✓ Handle clothes with care
+✓ Communicate with customers
+
+FOR ADMINS:
+✓ Monitor complaints daily
+✓ Approve providers after verification
+✓ Block abusive users
+✓ Track system performance
+✓ Ensure fair resolution
+
+==================================================
+FREQUENTLY ASKED QUESTIONS
+==================================================
+
+Q: How do I find providers near me?
+A: System automatically shows providers within their service radius from your location.
+
+Q: Can I cancel an order?
+A: Yes, before pickup. After pickup, contact provider or admin.
+
+Q: What if clothes are damaged?
+A: Raise a complaint immediately with details. Admin will investigate.
+
+Q: How do I change my prices as a provider?
+A: Go to "Manage Garments" and update prices anytime.
+
+Q: Is my payment information safe?
+A: Yes, we don't store payment details. UPI payments go through official apps.
+
+Q: Can I serve multiple areas as a provider?
+A: Yes, set your service radius (up to 20 km).
+
+Q: What if provider doesn't show up?
+A: Contact admin immediately. We'll resolve and may penalize provider.
+
+Q: How do I become a provider?
+A: Register, complete profile, wait for admin approval, start receiving orders.
+   (If using test data, provider accounts are pre-approved)
+
+Q: Can I test the system without registering?
+A: Yes! If the seeder was run, use test accounts from credentials.txt file.
+   Example: Login as customer1@test.com / 123456 to test customer features.
+
+==================================================
+CONTACT INFORMATION
+==================================================
+
+For technical support, business inquiries, or partnership opportunities, please contact the system administrator through the platform.
+
+==================================================
+END OF USER GUIDE
+==================================================
