@@ -38,6 +38,7 @@ console.log('🔧 API Configuration Initialized (PRODUCTION)');
 console.log('   📱 Is Capacitor:', isCapacitor());
 console.log('   🌐 API Base URL:', API_BASE_URL);
 console.log('   🔗 Auth Endpoint:', API_ENDPOINTS.AUTH);
+console.log('   ✅ Production Mode: Render Deployment');
 console.log('='.repeat(60));
 
 export default API_BASE_URL;
