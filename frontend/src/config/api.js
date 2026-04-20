@@ -6,15 +6,20 @@ const isCapacitor = () => {
   return result;
 };
 
+// Production backend URL - HARDCODED for Render deployment
+const PRODUCTION_BACKEND = 'https://lms-d0q1.onrender.com';
+
 // Determine the API base URL based on environment
 const getApiBaseUrl = () => {
   const isCap = isCapacitor();
   console.log('🔧 Getting API Base URL...');
   console.log('   Is Capacitor:', isCap);
+  console.log('   Window Location:', window.location.origin);
   
-  // Use production backend for both web and mobile
-  const url = 'https://lms-d0q1.onrender.com';
+  // ALWAYS use production backend
+  const url = PRODUCTION_BACKEND;
   console.log('   🌐 Using Production Backend:', url);
+  console.log('   ✅ Hardcoded Backend URL (No localhost)');
   
   return url;
 };
@@ -39,6 +44,7 @@ console.log('   📱 Is Capacitor:', isCapacitor());
 console.log('   🌐 API Base URL:', API_BASE_URL);
 console.log('   🔗 Auth Endpoint:', API_ENDPOINTS.AUTH);
 console.log('   ✅ Production Mode: Render Deployment');
+console.log('   🎯 Backend Server: lms-d0q1.onrender.com');
 console.log('='.repeat(60));
 
 export default API_BASE_URL;
