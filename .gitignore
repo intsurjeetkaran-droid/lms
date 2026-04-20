@@ -12,6 +12,9 @@ package-lock.json
 .env.test.local
 .env.production.local
 
+# Credentials and sensitive files
+credentials.txt
+
 # Build outputs
 dist/
 build/
