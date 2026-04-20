@@ -19,6 +19,12 @@ credentials.txt
 *.apk
 LaundryApp.apk
 
+# Large media files
+*.mp4
+*.mov
+*.avi
+LMS_demo.mp4
+
 # Build outputs
 dist/
 build/
