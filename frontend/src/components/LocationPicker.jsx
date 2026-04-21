@@ -11,19 +11,41 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-function LocationMarker({ position, setPosition }) {
+function LocationMarker({ position, setPosition, setAddress, setLoadingAddress }) {
   useMapEvents({
     click(e) {
       setPosition(e.latlng);
+      // Reverse geocode to get address
+      fetchAddress(e.latlng.lat, e.latlng.lng, setAddress, setLoadingAddress);
     },
   });
 
   return position ? <Marker position={position} /> : null;
 }
 
+// Function to fetch address from coordinates using Nominatim
+const fetchAddress = async (lat, lng, setAddress, setLoadingAddress) => {
+  if (setLoadingAddress) setLoadingAddress(true);
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`
+    );
+    const data = await response.json();
+    
+    if (data && data.display_name) {
+      setAddress(data.display_name);
+    }
+  } catch (error) {
+    console.error('Error fetching address:', error);
+  } finally {
+    if (setLoadingAddress) setLoadingAddress(false);
+  }
+};
+
 const LocationPicker = ({ onLocationSelect }) => {
   const [position, setPosition] = useState(null);
   const [address, setAddress] = useState('');
+  const [loadingAddress, setLoadingAddress] = useState(false);
 
   useEffect(() => {
     // Get current location
@@ -31,6 +53,8 @@ const LocationPicker = ({ onLocationSelect }) => {
       (pos) => {
         const { latitude, longitude } = pos.coords;
         setPosition({ lat: latitude, lng: longitude });
+        // Fetch address for current location
+        fetchAddress(latitude, longitude, setAddress, setLoadingAddress);
       },
       (error) => {
         console.error('Error getting location:', error);
@@ -57,12 +81,14 @@ const LocationPicker = ({ onLocationSelect }) => {
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium mb-2 text-slate-900 dark:text-slate-100">Pickup Address</label>
+        <label className="block text-sm font-medium mb-2 text-slate-900 dark:text-slate-100">
+          Pickup Address {loadingAddress && <span className="text-blue-600 dark:text-blue-400">(Loading...)</span>}
+        </label>
         <input
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          placeholder="Enter your address"
+          placeholder="Click on map or enter address manually"
           className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-gray-500"
         />
       </div>
@@ -77,12 +103,12 @@ const LocationPicker = ({ onLocationSelect }) => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <LocationMarker position={position} setPosition={setPosition} />
+          <LocationMarker position={position} setPosition={setPosition} setAddress={setAddress} setLoadingAddress={setLoadingAddress} />
         </MapContainer>
       </div>
 
       <p className="text-sm text-slate-600 dark:text-slate-400">
-        Click on the map to set your exact location
+        💡 Click anywhere on the map to automatically fill the address
       </p>
 
       <button
