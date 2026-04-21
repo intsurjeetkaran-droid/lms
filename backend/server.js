@@ -29,8 +29,22 @@ connectDB();
 
 // Enable CORS (Cross-Origin Resource Sharing) for frontend communication
 console.log('🔧 Configuring middleware...');
+
+const allowedOrigins = [
+  'https://jade-cascaron-07c619.netlify.app', // Netlify frontend
+  'http://localhost:5173',                      // Vite dev server
+  'http://localhost:3000',                      // Alt dev server
+  'http://10.0.2.2:5173',                       // Android emulator
+];
+
 app.use(cors({
-  origin: true, // Allow all origins with credentials
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    console.warn(`⚠️  CORS blocked origin: ${origin}`);
+    callback(new Error(`CORS policy: origin ${origin} not allowed`));
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   exposedHeaders: ['Content-Type', 'Authorization'],
@@ -41,7 +55,14 @@ app.use(cors({
 }));
 
 // Handle preflight requests explicitly
-app.options('*', cors());
+app.options('*', cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`CORS policy: origin ${origin} not allowed`));
+  },
+  credentials: true,
+}));
 
 // Log all incoming origins for debugging
 app.use((req, res, next) => {
