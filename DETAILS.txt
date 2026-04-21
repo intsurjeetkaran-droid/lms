@@ -5,6 +5,19 @@ LAUNDRY SERVICE SYSTEM - USER GUIDE
 This document explains the Laundry Service System in simple, non-technical terms for business users, managers, and stakeholders.
 
 ==================================================
+LIVE SYSTEM ACCESS
+==================================================
+
+The system is now LIVE and accessible at:
+
+🌐 WEBSITE: https://lms-frontend-98mc.onrender.com
+📱 MOBILE APP: LaundryApp.apk (4.3 MB, in project root)
+
+SYSTEM STATUS: ✅ Production Ready
+HOSTING: Render (Frontend + Backend)
+DATABASE: MongoDB Atlas (Cloud)
+
+==================================================
 WHAT IS THIS SYSTEM?
 ==================================================
 
@@ -307,6 +320,12 @@ Complaint Types:
 ==================================================
 GETTING STARTED
 ==================================================
+
+VISIT THE LIVE WEBSITE:
+1. Open your browser
+2. Go to: https://lms-frontend-98mc.onrender.com
+3. You'll see the landing page
+4. Click "Get Started" or "Register" to begin
 
 FIRST TIME VISITORS:
 1. Visit the website (you'll see the landing page)
