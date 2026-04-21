@@ -79,46 +79,56 @@ const MyOrders = () => {
             onAction={() => window.location.href = '/customer/select-provider'}
           />
         ) : (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {orders.map((order) => (
-              <div key={order._id} className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-soft hover:shadow-soft-lg transition-all border border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
+              <div key={order._id} className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-soft hover:shadow-soft-lg transition-all border border-slate-200 dark:border-slate-700 flex flex-col">
+                {/* Header */}
+                <div className="mb-4">
+                  <div className="flex justify-between items-start mb-2">
                     <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                       Order #{order._id.slice(-6)}
                     </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
-                      Provider: {order.providerId?.name || 'N/A'}
-                    </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
-                      {new Date(order.createdAt).toLocaleDateString('en-US', { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
-                      })}
-                    </p>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
+                      {order.status.replace('_', ' ').toUpperCase()}
+                    </span>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(order.status)}`}>
-                    {order.status.replace('_', ' ').toUpperCase()}
-                  </span>
-                </div>
-
-                <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
-                  <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
-                    Items: {order.items.length}
+                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+                    {order.providerId?.name || 'N/A'}
                   </p>
-                  <p className="text-lg font-bold bg-gradient-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent">
-                    Total: ₹{order.totalPrice}
-                  </p>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Payment: {order.paymentStatus === 'paid' ? '✓ Paid' : 'Pending'}
+                  <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">
+                    {new Date(order.createdAt).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
                   </p>
                 </div>
 
-                <div className="mt-4 flex gap-2 flex-wrap">
+                {/* Order Details */}
+                <div className="border-t border-slate-200 dark:border-slate-700 pt-4 mb-4 flex-grow">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Items:</span>
+                      <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">{order.items.length}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Total:</span>
+                      <span className="text-lg font-bold bg-gradient-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent">₹{order.totalPrice}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Payment:</span>
+                      <span className={`text-sm font-medium ${order.paymentStatus === 'paid' ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400'}`}>
+                        {order.paymentStatus === 'paid' ? '✓ Paid' : 'Pending'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex flex-col gap-2">
                   <Link
                     to={`/customer/orders/${order._id}`}
-                    className="bg-gradient-to-r from-sky-500 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-sky-600 hover:to-indigo-700 transition-all text-sm font-medium"
+                    className="bg-gradient-to-r from-sky-500 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-sky-600 hover:to-indigo-700 transition-all text-sm font-medium text-center"
                   >
                     View Details
                   </Link>
@@ -126,7 +136,7 @@ const MyOrders = () => {
                   {order.status === 'delivered' && (
                     <Link
                       to={`/customer/feedback/${order._id}`}
-                      className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all text-sm font-medium"
+                      className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all text-sm font-medium text-center"
                     >
                       Give Feedback
                     </Link>
@@ -135,7 +145,7 @@ const MyOrders = () => {
                   {order.status === 'completed' && (
                     <Link
                       to={`/customer/complaint/${order._id}`}
-                      className="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-all text-sm font-medium"
+                      className="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-all text-sm font-medium text-center"
                     >
                       Raise Complaint
                     </Link>
