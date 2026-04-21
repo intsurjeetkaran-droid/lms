@@ -64,8 +64,10 @@ coverage/
 
 # Keep these files (override patterns above)
 !LaundryApp.apk
-!LMS_demo.mp4
 !DETAILS.pdf
 
 # Allow APK in releases
 !releases/*.apk
+
+# Ignore large demo video (>100MB)
+LMS_demo.mp4
