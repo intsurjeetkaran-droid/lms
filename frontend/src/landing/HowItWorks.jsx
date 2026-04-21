@@ -62,31 +62,25 @@ const HowItWorks = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [currentStep, setCurrentStep] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Auto-advance carousel
   useEffect(() => {
-    if (!isAutoPlaying) return;
-
     const interval = setInterval(() => {
       setCurrentStep((prev) => (prev + 1) % steps.length);
     }, 3000); // Change slide every 3 seconds
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, []);
 
   const nextStep = () => {
-    setIsAutoPlaying(false);
     setCurrentStep((prev) => (prev + 1) % steps.length);
   };
 
   const prevStep = () => {
-    setIsAutoPlaying(false);
     setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length);
   };
 
   const goToStep = (index) => {
-    setIsAutoPlaying(false);
     setCurrentStep(index);
   };
 
@@ -188,16 +182,6 @@ const HowItWorks = () => {
                 aria-label={`Go to step ${index + 1}`}
               />
             ))}
-          </div>
-
-          {/* Auto-play Toggle */}
-          <div className="text-center mt-6">
-            <button
-              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className="text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
-            >
-              {isAutoPlaying ? '⏸ Pause' : '▶ Play'} Auto-advance
-            </button>
           </div>
 
           {/* All Steps Overview (Mobile Friendly) */}
