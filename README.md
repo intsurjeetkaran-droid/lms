@@ -307,6 +307,12 @@ awaiting_review → confirmed → picked_up → processing → delivered → com
 
 The system includes a native Android mobile application using Capacitor.
 
+### 📥 Download
+
+**[Download LaundryApp.apk](https://github.com/intsurjeetkaran-droid/lms/raw/main/LaundryApp.apk)** (4.32 MB)
+
+Or see [APK_DOWNLOAD.md](./APK_DOWNLOAD.md) for detailed installation instructions.
+
 ### Mobile Features
 - Native GPS location detection
 - Secure token storage
@@ -316,14 +322,9 @@ The system includes a native Android mobile application using Capacitor.
 - Full dark mode support
 - Offline support with cached data
 
-### APK Location
-```
-LaundryApp.apk (in project root) - 4.3 MB
-```
-
 ### Installation
-1. Copy `LaundryApp.apk` to your Android phone
-2. Open the APK file
+1. Download `LaundryApp.apk` from the link above
+2. Open the APK file on your Android phone
 3. Allow "Install from Unknown Sources" if prompted
 4. Tap "Install"
 5. Open the app
