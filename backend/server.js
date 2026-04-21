@@ -43,6 +43,12 @@ app.use(cors({
 // Handle preflight requests explicitly
 app.options('*', cors());
 
+// Log all incoming origins for debugging
+app.use((req, res, next) => {
+  console.log(`🌐 Request from origin: ${req.headers.origin || 'No Origin'}`);
+  next();
+});
+
 // Parse incoming JSON requests
 app.use(express.json());
 
