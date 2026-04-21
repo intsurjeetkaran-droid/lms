@@ -66,3 +66,6 @@ coverage/
 !LaundryApp.apk
 !LMS_demo.mp4
 !DETAILS.pdf
+
+# Allow APK in releases
+!releases/*.apk

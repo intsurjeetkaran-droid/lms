@@ -6,6 +6,7 @@ A comprehensive full-stack laundry management platform where customers can selec
 
 - **Frontend**: https://lms-frontend-98mc.onrender.com
 - **Backend API**: https://lms-d0ql.onrender.com
+- **Android App**: [Download APK](./APK_DOWNLOAD.md) (4.32 MB)
 - **Status**: ✅ Production Ready
 
 ## 🚀 Features
