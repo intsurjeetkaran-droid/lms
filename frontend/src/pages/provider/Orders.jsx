@@ -98,45 +98,62 @@ const ProviderOrders = () => {
           ))}
         </div>
 
-        {/* Orders List */}
+        {/* Orders Grid */}
         {filteredOrders.length === 0 ? (
           <div className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow text-center border border-slate-200 dark:border-slate-700">
             <p className="text-xl text-slate-600 dark:text-slate-400">No orders found</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredOrders.map((order) => (
-              <div key={order._id} className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow border border-slate-200 dark:border-slate-700">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
+              <div key={order._id} className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                {/* Header */}
+                <div className="mb-4">
+                  <div className="flex justify-between items-start mb-2">
                     <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                       Order #{order._id.slice(-6)}
                     </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
-                      Customer: {order.customerId?.name} ({order.customerId?.phone})
-                    </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
-                      {new Date(order.createdAt).toLocaleString()}
-                    </p>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
+                      {order.status.replace('_', ' ').toUpperCase()}
+                    </span>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(order.status)}`}>
-                    {order.status.replace('_', ' ').toUpperCase()}
-                  </span>
-                </div>
-
-                <div className="border-t border-slate-200 dark:border-slate-700 pt-4 mb-4">
-                  <p className="text-sm text-slate-600 dark:text-slate-400">Items: {order.items.length}</p>
-                  <p className="text-lg font-bold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">Total: ₹{order.totalPrice}</p>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Payment: {order.paymentStatus === 'paid' ? '✓ Paid' : 'Pending'}
+                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+                    {order.customerId?.name}
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-500">
+                    {order.customerId?.phone}
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">
+                    {new Date(order.createdAt).toLocaleDateString()} {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
 
-                <div className="flex gap-2 flex-wrap">
+                {/* Order Details */}
+                <div className="border-t border-slate-200 dark:border-slate-700 pt-4 mb-4 flex-grow">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Items:</span>
+                      <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">{order.items.length}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Total:</span>
+                      <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">₹{order.totalPrice}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Payment:</span>
+                      <span className={`text-sm font-medium ${order.paymentStatus === 'paid' ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400'}`}>
+                        {order.paymentStatus === 'paid' ? '✓ Paid' : 'Pending'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex flex-col gap-2">
                   {order.status === 'awaiting_review' && (
                     <Link
                       to={`/provider/orders/${order._id}/review`}
-                      className="bg-gradient-to-r from-blue-600 to-violet-600 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-violet-700 transition-all"
+                      className="bg-gradient-to-r from-blue-600 to-violet-600 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-violet-700 transition-all text-center font-medium"
                     >
                       Review Order
                     </Link>
@@ -145,7 +162,7 @@ const ProviderOrders = () => {
                   {order.status === 'confirmed' && (
                     <button
                       onClick={() => handleStatusUpdate(order._id, 'picked_up')}
-                      className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-all"
+                      className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-all font-medium"
                     >
                       Mark as Picked Up
                     </button>
@@ -154,7 +171,7 @@ const ProviderOrders = () => {
                   {order.status === 'picked_up' && (
                     <button
                       onClick={() => handleStatusUpdate(order._id, 'processing')}
-                      className="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-all"
+                      className="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-all font-medium"
                     >
                       Start Processing
                     </button>
@@ -163,7 +180,7 @@ const ProviderOrders = () => {
                   {order.status === 'processing' && (
                     <button
                       onClick={() => handleStatusUpdate(order._id, 'delivered')}
-                      className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all"
+                      className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all font-medium"
                     >
                       Mark as Delivered
                     </button>
@@ -172,7 +189,7 @@ const ProviderOrders = () => {
                   {order.status === 'delivered' && (
                     <button
                       onClick={() => handleStatusUpdate(order._id, 'completed')}
-                      className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-all"
+                      className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-all font-medium"
                     >
                       Complete Order
                     </button>
@@ -182,9 +199,9 @@ const ProviderOrders = () => {
                     href={`https://www.google.com/maps/dir/?api=1&destination=${order.pickupLocation.lat},${order.pickupLocation.lng}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all"
+                    className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all text-center font-medium"
                   >
-                    Navigate
+                    📍 Navigate
                   </a>
                 </div>
               </div>
