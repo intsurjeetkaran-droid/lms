@@ -7,7 +7,7 @@ const isCapacitor = () => {
 };
 
 // Production backend URL - HARDCODED for Render deployment
-const PRODUCTION_BACKEND = 'https://lms-d0q1.onrender.com';
+const PRODUCTION_BACKEND = 'https://lms-d0ql.onrender.com';
 
 // Determine the API base URL based on environment
 const getApiBaseUrl = () => {
@@ -44,7 +44,7 @@ console.log('   📱 Is Capacitor:', isCapacitor());
 console.log('   🌐 API Base URL:', API_BASE_URL);
 console.log('   🔗 Auth Endpoint:', API_ENDPOINTS.AUTH);
 console.log('   ✅ Production Mode: Render Deployment');
-console.log('   🎯 Backend Server: lms-d0q1.onrender.com');
+console.log('   🎯 Backend Server: lms-d0ql.onrender.com');
 console.log('='.repeat(60));
 
 export default API_BASE_URL;
