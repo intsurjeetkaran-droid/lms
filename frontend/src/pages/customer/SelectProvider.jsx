@@ -9,6 +9,7 @@ import { Store, MapPin } from 'lucide-react';
 
 const SelectProvider = () => {
   const [providers, setProviders] = useState([]);
+  const [providerRanges, setProviderRanges] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [location, setLocation] = useState(null);
@@ -36,6 +37,20 @@ const SelectProvider = () => {
       setError(null);
       const { data } = await axios.get(`/api/providers/nearby?lat=${lat}&lng=${lng}`);
       setProviders(data);
+
+      // Fetch price range for each provider in parallel
+      const ranges = {};
+      await Promise.all(
+        data.map(async (provider) => {
+          try {
+            const { data: range } = await axios.get(`/api/garments/price-range/${provider.userId._id}`);
+            ranges[provider.userId._id] = range;
+          } catch {
+            ranges[provider.userId._id] = { minPrice: 20, maxPrice: 100 };
+          }
+        })
+      );
+      setProviderRanges(ranges);
     } catch (error) {
       console.error('Error fetching providers:', error);
       setError(error.response?.data?.message || 'Failed to load providers. Please try again.');
@@ -115,6 +130,14 @@ const SelectProvider = () => {
                     <span className="text-slate-600 dark:text-slate-400">Contact:</span>
                     <span className="font-medium text-slate-900 dark:text-slate-100">{provider.userId.phone}</span>
                   </div>
+                  {providerRanges[provider.userId._id] && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-600 dark:text-slate-400">Custom item range:</span>
+                      <span className="font-medium text-amber-600 dark:text-amber-400">
+                        ₹{providerRanges[provider.userId._id].minPrice} – ₹{providerRanges[provider.userId._id].maxPrice}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 
                 <button className="w-full bg-gradient-to-r from-sky-500 to-indigo-600 text-white py-3 rounded-lg hover:from-sky-600 hover:to-indigo-700 transition-all font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">

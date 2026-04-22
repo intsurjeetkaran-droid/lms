@@ -1,6 +1,7 @@
 import Order from '../models/Order.js';
 import PaymentConfig from '../models/PaymentConfig.js';
 import ProviderProfile from '../models/ProviderProfile.js';
+import PriceRange from '../models/PriceRange.js';
 import { calculateDistance } from '../utils/calculateDistance.js';
 
 // @desc    Create order
@@ -144,13 +145,37 @@ export const reviewOrder = async (req, res) => {
 
     const { items, extraCharge } = req.body;
 
+    // Get this provider's price range for custom item validation
+    let priceRange = await PriceRange.findOne({ providerId: req.user._id });
+    if (!priceRange) {
+      priceRange = { minPrice: 20, maxPrice: 100 };
+    }
+
+    // Validate custom item prices against provider's range
+    if (items) {
+      for (const item of items) {
+        const orderItem = order.items.find(i => i.name === item.name);
+        if (orderItem && orderItem.isCustom) {
+          // finalPrice in the payload is price-per-item * quantity
+          const pricePerItem = item.quantity > 0 ? item.finalPrice / item.quantity : item.finalPrice;
+          if (pricePerItem < priceRange.minPrice || pricePerItem > priceRange.maxPrice) {
+            return res.status(400).json({
+              message: `Price for "${item.name}" must be between ₹${priceRange.minPrice} and ₹${priceRange.maxPrice} per item`,
+              minPrice: priceRange.minPrice,
+              maxPrice: priceRange.maxPrice
+            });
+          }
+        }
+      }
+    }
+
     // Update custom item prices
     if (items) {
       order.items = order.items.map(item => {
         const updatedItem = items.find(i => i.name === item.name);
         if (updatedItem && item.isCustom) {
           return {
-            ...item,
+            ...item.toObject(),
             finalPrice: updatedItem.finalPrice
           };
         }

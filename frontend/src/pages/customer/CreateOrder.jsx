@@ -161,11 +161,18 @@ const CreateOrder = () => {
 
             {/* Custom Item */}
             <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700">
-              <h2 className="text-xl font-semibold mb-1 text-slate-900 dark:text-slate-100">Add Custom Item</h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-                Custom item prices are set by the provider during review, within the range of{' '}
-                <span className="font-semibold text-blue-600 dark:text-blue-400">₹{priceRange.minPrice} – ₹{priceRange.maxPrice}</span>.
-              </p>
+              <h2 className="text-xl font-semibold mb-2 text-slate-900 dark:text-slate-100">Add Custom Item</h2>
+
+              {/* Price range hint */}
+              <div className="flex items-start gap-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg px-4 py-3 mb-4">
+                <span className="text-amber-500 text-lg leading-none mt-0.5">ℹ</span>
+                <div className="text-sm text-amber-800 dark:text-amber-300">
+                  <span className="font-semibold">Custom item pricing:</span> The provider will set the price
+                  during order review. Their allowed range is{' '}
+                  <span className="font-bold">₹{priceRange.minPrice} – ₹{priceRange.maxPrice}</span> per item.
+                  You'll see the final price before confirming payment.
+                </div>
+              </div>
               <div className="flex gap-4">
                 <input
                   type="text"
