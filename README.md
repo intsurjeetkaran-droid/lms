@@ -1,40 +1,37 @@
 # Laundry Service Management System
 
-A comprehensive full-stack laundry management platform where customers can select garments individually, service providers control pricing dynamically, and the system handles pickup & delivery with GPS integration.
+A full-stack laundry management platform connecting customers, service providers, and administrators. Customers find nearby providers, place orders with GPS-based pickup, and pay via UPI or cash. Providers manage their garment catalog, set their own custom item price ranges, and handle the full order workflow.
 
 ## 🌐 Live Demo
 
 - **Frontend**: https://lms-frontend-98mc.onrender.com
 - **Backend API**: https://lms-d0ql.onrender.com
-- **Android App**: [Download APK](./APK_DOWNLOAD.md) (4.32 MB)
 - **Status**: ✅ Production Ready
 
 ## 🚀 Features
 
-### 👤 Customer Features
+### 👤 Customer
 - Multi-step registration with role selection
-- Browse nearby service providers based on GPS location
-- Select garments individually with real-time pricing
-- Add custom garments for provider review
-- GPS-based location selection for pickup
+- Browse nearby providers based on GPS location
+- Select garments with real-time pricing
+- Add custom items — see the provider's allowed price range as a hint
+- GPS-based pickup location selection
 - Track order status in real-time
-- Multiple payment options (UPI & COD)
-- Give feedback and ratings
-- Raise complaints if needed
+- UPI and Cash on Delivery payment options
+- Submit feedback and ratings
+- Raise complaints
 
-### 🏪 Service Provider Features
-- Multi-step registration with business details
-- Automatic location detection using browser GPS
-- Complete profile setup with shop location
-- Admin approval system before accepting orders
+### 🏪 Service Provider
+- Multi-step registration with business details and GPS location
+- Admin approval before going live
 - Manage garment catalog with custom pricing
-- Review and approve orders with custom item pricing
-- Update order status through workflow
-- Configure payment methods (UPI ID, QR Code)
-- Set pickup, delivery, and distance charges
-- Navigate to customer locations via GPS
+- **Set a custom item price range** (default ₹20–₹100, editable anytime)
+- Garment prices are validated against the provider's own range — out-of-range entries are blocked
+- Review orders and set prices for custom items
+- Full order status workflow management
+- Configure UPI, QR code, pickup/delivery/distance charges
 
-### 👨‍💼 Administrator Features
+### 👨‍💼 Administrator
 - Monitor all users and orders
 - Block/unblock users
 - Approve service providers
@@ -44,27 +41,22 @@ A comprehensive full-stack laundry management platform where customers can selec
 ## 📋 Tech Stack
 
 ### Frontend
-- **React** (Vite) - Fast and modern UI framework
-- **Tailwind CSS** - Utility-first styling with dark mode
-- **Axios** - HTTP client for API calls
-- **React Router** - Client-side routing
-- **Leaflet** - Interactive maps for location selection
-- **Framer Motion** - Smooth animations and transitions
-- **Lucide React** - Professional icon library
+- **React** (Vite)
+- **Tailwind CSS** — dark mode support
+- **Axios**
+- **React Router**
+- **Leaflet** — interactive maps
+- **Lucide React** — icons
 
 ### Backend
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web application framework
-- **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB ODM
-- **JWT** - Authentication tokens
-- **bcrypt** - Password hashing
-- **CORS** - Cross-origin resource sharing
+- **Node.js + Express.js**
+- **MongoDB + Mongoose**
+- **JWT** authentication
+- **bcrypt** password hashing
 
 ### Deployment
-- **Render** - Both frontend and backend hosting
-- **MongoDB Atlas** - Cloud database
-- **Git** - Version control
+- **Render** — frontend (static) + backend (Node)
+- **MongoDB Atlas** — cloud database
 
 ## 🏗️ Project Structure
 
@@ -75,42 +67,38 @@ laundry-service/
 │   ├── controllers/     # Business logic
 │   ├── middleware/      # Auth, validation, error handling
 │   ├── models/          # MongoDB schemas
+│   │   └── PriceRange.js  # Per-provider custom item price range
 │   ├── routes/          # API endpoints
 │   ├── utils/           # Helper functions
-│   └── server.js        # Entry point
+│   └── server.js
 ├── frontend/
 │   ├── src/
 │   │   ├── components/  # Reusable UI components
-│   │   ├── context/     # React context (Auth)
-│   │   ├── landing/     # Landing page components
-│   │   ├── pages/       # Route pages (admin, customer, provider)
-│   │   ├── config/      # API configuration
-│   │   └── utils/       # Helper utilities
+│   │   ├── context/     # Auth context
+│   │   ├── landing/     # Landing page
+│   │   ├── pages/
+│   │   │   ├── admin/
+│   │   │   ├── customer/
+│   │   │   └── provider/
+│   │   └── config/      # API configuration
 │   └── dist/            # Production build
-├── render.yaml          # Render deployment config
-└── README.md            # This file
+└── README.md
 ```
 
-## 🔧 Local Development Setup
+## 🔧 Local Development
 
 ### Prerequisites
-- Node.js (v16 or higher)
+- Node.js v16+
 - MongoDB Atlas account or local MongoDB
-- npm or yarn package manager
 
-### Backend Setup
+### Backend
 
-1. Navigate to backend directory:
 ```bash
 cd backend
-```
-
-2. Install dependencies:
-```bash
 npm install
 ```
 
-3. Create `.env` file:
+Create `.env`:
 ```env
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
@@ -119,139 +107,78 @@ JWT_EXPIRE=7d
 NODE_ENV=development
 ```
 
-4. Start the backend server:
 ```bash
 npm run dev
 ```
 
-Backend will run on `http://localhost:5000`
+Runs on `http://localhost:5000`
 
-### Frontend Setup
+### Frontend
 
-1. Navigate to frontend directory:
 ```bash
 cd frontend
-```
-
-2. Install dependencies:
-```bash
 npm install
-```
-
-3. Update API URL in `src/config/api.js`:
-```javascript
-const PRODUCTION_BACKEND = 'http://localhost:5000';
-```
-
-4. Start the development server:
-```bash
 npm run dev
 ```
 
-Frontend will run on `http://localhost:5173`
+Runs on `http://localhost:5173`
 
-### Database Seeding (Optional)
+Update `src/config/api.js` to point to `http://localhost:5000` for local development.
 
-Seed the database with test data:
+### Seed Test Data
 
 ```bash
 cd backend
 npm run seed
 ```
 
-This creates:
-- 1 Admin account
-- 10 Provider accounts (with profiles, garments, payment configs)
-- 5 Customer accounts
-- 80 Garments (8 types per provider)
-- 15 Sample orders
-- Feedback and complaints
-
-Check `credentials.txt` for login details. All passwords are `123456`.
-
-## 🌐 Deployment
-
-### Render Deployment (Current Setup)
-
-The project is configured for Render deployment with `render.yaml`:
-
-**Backend Service:**
-- Name: `lms`
-- Type: Node.js web service
-- Root Directory: `backend`
-- Build Command: `npm install`
-- Start Command: `node server.js`
-- Environment Variables: Set in Render dashboard
-
-**Frontend Service:**
-- Name: `lms-frontend`
-- Type: Static site
-- Root Directory: `frontend`
-- Build Command: `npm install && npm run build`
-- Publish Directory: `dist`
-
-### Environment Variables (Render Dashboard)
-
-Set these in your Render backend service:
-- `MONGODB_URI` - Your MongoDB Atlas connection string
-- `JWT_SECRET` - Random secret key for JWT
-- `JWT_EXPIRE` - Token expiration (e.g., `7d`)
-- `NODE_ENV` - Set to `production`
-
-### Deployment Steps
-
-1. **Push to GitHub:**
-```bash
-git add .
-git commit -m "Deploy to Render"
-git push origin main
-```
-
-2. **Render Auto-Deploys:**
-- Backend redeploys automatically on push
-- Frontend rebuilds automatically on push
-- Check deploy logs in Render dashboard
-
-3. **Update Frontend API URL:**
-- Edit `frontend/src/config/api.js`
-- Set `PRODUCTION_BACKEND` to your Render backend URL
-- Commit and push changes
+Creates 1 admin, 10 providers, 5 customers, 80 garments, 15 sample orders, feedback, and complaints. All passwords: `123456`. See `credentials.txt` for full list.
 
 ## 🔐 API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/me` - Get current user
-
-### Orders
-- `POST /api/orders` - Create order
-- `GET /api/orders/my-orders` - Get customer orders
-- `GET /api/orders/provider-orders` - Get provider orders
-- `PUT /api/orders/:id/review` - Review order (provider)
-- `PUT /api/orders/:id/status` - Update order status
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register user |
+| POST | `/api/auth/login` | Login |
+| GET | `/api/auth/me` | Current user |
 
 ### Garments
-- `POST /api/garments` - Add garment
-- `GET /api/garments/provider/:id` - Get provider garments
-- `PUT /api/garments/:id` - Update garment
-- `DELETE /api/garments/:id` - Delete garment
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| GET | `/api/garments/price-range/:providerId` | Public | Get a provider's custom item price range |
+| GET | `/api/garments/my-price-range` | Provider | Get own price range |
+| PUT | `/api/garments/my-price-range` | Provider | Update own price range |
+| POST | `/api/garments` | Provider | Add garment (price validated against range) |
+| GET | `/api/garments/provider/:id` | Public | Get provider's active garments |
+| GET | `/api/garments/my-garments` | Provider | Get own garments |
+| PUT | `/api/garments/:id` | Provider | Update garment |
+| DELETE | `/api/garments/:id` | Provider | Delete garment |
+
+### Orders
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/orders` | Create order |
+| GET | `/api/orders/my-orders` | Customer orders |
+| GET | `/api/orders/provider-orders` | Provider orders |
+| PUT | `/api/orders/:id/review` | Provider reviews order |
+| PUT | `/api/orders/:id/status` | Update order status |
 
 ### Providers
-- `POST /api/providers/profile` - Create provider profile
-- `GET /api/providers/nearby` - Get nearby providers
-- `POST /api/providers/payment-config` - Setup payment config
-
-### Feedback & Complaints
-- `POST /api/feedback` - Submit feedback
-- `POST /api/complaints` - Raise complaint
-- `PUT /api/complaints/:id` - Update complaint (admin)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/providers/profile` | Create profile |
+| GET | `/api/providers/nearby` | Nearby providers |
+| POST | `/api/providers/payment-config` | Setup payment |
 
 ### Admin
-- `GET /api/admin/users` - Get all users
-- `PUT /api/admin/users/:id/block` - Block/unblock user
-- `GET /api/admin/orders` - Get all orders
-- `GET /api/admin/stats` - Get dashboard statistics
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/admin/users` | All users |
+| PUT | `/api/admin/users/:id/block` | Block/unblock |
+| PUT | `/api/admin/providers/:id/approve` | Approve provider |
+| GET | `/api/admin/orders` | All orders |
+| GET | `/api/admin/stats` | Dashboard stats |
 
 ## 🗺️ Order Status Flow
 
@@ -259,113 +186,55 @@ git push origin main
 awaiting_review → confirmed → picked_up → processing → delivered → completed
 ```
 
+## 💰 Custom Item Price Range
+
+Each provider controls their own price range for custom items:
+
+- **Default**: ₹20 – ₹100
+- Provider can edit the range anytime from the Manage Garments page
+- All garment prices (create and update) are validated server-side against the provider's range — requests outside the range return a `400` error
+- Customers see the provider's specific range as a hint when adding custom items to an order
+
 ## 💳 Payment Flow
 
-1. Customer creates order (status: `awaiting_review`)
-2. Provider reviews and sets final price (status: `confirmed`)
-3. Customer sees final price and payment options
-4. Customer selects payment method (UPI/COD)
-5. For UPI: Customer pays and enters transaction ID
-6. For COD: Payment collected on delivery
-7. Order proceeds through workflow
+1. Customer creates order → `awaiting_review`
+2. Provider reviews, sets final price → `confirmed`
+3. Customer selects UPI or COD
+4. For UPI: customer pays and enters transaction ID
+5. For COD: payment collected on delivery
+6. Order proceeds through pickup → processing → delivered → completed
 
-## 🔐 Security Features
+## 🔐 Security
 
-- Password hashing with bcrypt
-- JWT-based authentication
-- Protected routes with role-based access
-- Admin role protection (cannot create admin from frontend)
-- Role validation (only customer and provider allowed in registration)
-- Input validation on all forms
-- Secure API endpoints
-- Audit logging for critical actions
+- bcrypt password hashing
+- JWT authentication with role-based route protection
+- Admin role cannot be created from the frontend
+- Input validation on all endpoints
 - Provider approval system
+- Audit logging for critical actions
+- Blocked users rejected at middleware level
 
-## 🎨 Design System
+## 🎨 Design
 
-### Color Palette
-
-**Light Theme:**
-- Background: Sky 50 (#f0f9ff)
-- Primary: Sky 500 (#0ea5e9)
-- Cards: White (#ffffff)
-
-**Dark Theme:**
-- Background: Slate 900 (#0f172a)
-- Primary: Sky 400 (#38bdf8)
-- Cards: Slate 800 (#1e293b)
-
-### Features
-- Complete light/dark mode support on all pages
-- Smooth theme transitions
+- Light and dark mode on all pages
 - Mobile-first responsive design (320px+)
-- Touch-optimized buttons and controls
-- Accessible color contrast ratios
-- Professional animations with Framer Motion
-
-## 📱 Mobile App (Android)
-
-The system includes a native Android mobile application using Capacitor.
-
-### 📥 Download
-
-**[Download LaundryApp.apk](https://github.com/intsurjeetkaran-droid/lms/raw/main/LaundryApp.apk)** (4.32 MB)
-
-Or see [APK_DOWNLOAD.md](./APK_DOWNLOAD.md) for detailed installation instructions.
-
-### Mobile Features
-- Native GPS location detection
-- Secure token storage
-- Professional splash screen
-- Android back button support
-- Same UI as web version
-- Full dark mode support
-- Offline support with cached data
-
-### Installation
-1. Download `LaundryApp.apk` from the link above
-2. Open the APK file on your Android phone
-3. Allow "Install from Unknown Sources" if prompted
-4. Tap "Install"
-5. Open the app
-
-### Requirements
-- Android 5.1 (Lollipop) or higher
-- Internet connection
-- Location permission
+- Touch-optimized controls
+- Accessible color contrast
 
 ## 📊 Test Accounts
 
-If you ran the database seeder, use these credentials:
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@test.com | 123456 |
+| Provider | provider1@test.com – provider10@test.com | 123456 |
+| Customer | customer1@test.com – customer5@test.com | 123456 |
 
-**Admin:**
-- Email: admin@test.com
-- Password: 123456
-
-**Providers:**
-- Email: provider1@test.com to provider10@test.com
-- Password: 123456
-
-**Customers:**
-- Email: customer1@test.com to customer5@test.com
-- Password: 123456
-
-Check `credentials.txt` for complete list with names and phone numbers.
-
-## 🤝 Contributing
-
-This is a complete project template. Feel free to customize and extend based on your requirements.
+See `credentials.txt` for names and phone numbers.
 
 ## 📄 License
 
-This project is open source and available for educational and commercial use.
-
-## 📞 Support
-
-For issues or questions, please refer to the `DETAILS.txt` file for non-technical documentation.
+Open source — free for educational and commercial use.
 
 ---
 
 **Built with ❤️ for efficient laundry management**
-
-**Live on Render** | **Production Ready** | **Fully Functional**

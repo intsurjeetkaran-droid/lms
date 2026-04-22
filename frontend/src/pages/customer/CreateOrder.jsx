@@ -14,13 +14,24 @@ const CreateOrder = () => {
   const [location, setLocation] = useState(null);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  
+  const [priceRange, setPriceRange] = useState({ minPrice: 20, maxPrice: 100 });
+
   // Alert dialog state
   const [alertDialog, setAlertDialog] = useState({ isOpen: false, type: 'info', title: '', message: '' });
 
   useEffect(() => {
     fetchGarments();
+    fetchPriceRange();
   }, [providerId]);
+
+  const fetchPriceRange = async () => {
+    try {
+      const { data } = await axios.get(`/api/garments/price-range/${providerId}`);
+      setPriceRange(data);
+    } catch (error) {
+      console.error('Error fetching price range:', error);
+    }
+  };
 
   const fetchGarments = async () => {
     try {
@@ -150,7 +161,11 @@ const CreateOrder = () => {
 
             {/* Custom Item */}
             <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700">
-              <h2 className="text-xl font-semibold mb-4 text-slate-900 dark:text-slate-100">Add Custom Item</h2>
+              <h2 className="text-xl font-semibold mb-1 text-slate-900 dark:text-slate-100">Add Custom Item</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                Custom item prices are set by the provider during review, within the range of{' '}
+                <span className="font-semibold text-blue-600 dark:text-blue-400">₹{priceRange.minPrice} – ₹{priceRange.maxPrice}</span>.
+              </p>
               <div className="flex gap-4">
                 <input
                   type="text"
