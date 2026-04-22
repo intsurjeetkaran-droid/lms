@@ -8,9 +8,7 @@ import {
   CheckCircle, 
   CreditCard, 
   Truck, 
-  Sparkles,
-  ChevronLeft,
-  ChevronRight
+  Sparkles
 } from 'lucide-react';
 
 const steps = [
@@ -71,14 +69,6 @@ const HowItWorks = () => {
 
     return () => clearInterval(interval);
   }, []);
-
-  const nextStep = () => {
-    setCurrentStep((prev) => (prev + 1) % steps.length);
-  };
-
-  const prevStep = () => {
-    setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length);
-  };
 
   const goToStep = (index) => {
     setCurrentStep(index);
@@ -151,21 +141,7 @@ const HowItWorks = () => {
             </div>
 
             {/* Navigation Arrows */}
-            <button
-              onClick={prevStep}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors z-20"
-              aria-label="Previous step"
-            >
-              <ChevronLeft size={24} className="text-slate-700 dark:text-slate-300" />
-            </button>
-
-            <button
-              onClick={nextStep}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors z-20"
-              aria-label="Next step"
-            >
-              <ChevronRight size={24} className="text-slate-700 dark:text-slate-300" />
-            </button>
+            
           </div>
 
           {/* Dots Navigation */}
